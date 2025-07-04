@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/prop-types */
 import "./App.css";
 import chef from "./images/chef.jpg";
 
@@ -23,6 +25,10 @@ const dishObjects = items.map((dish, i) => ({
 
 function Main({ dishes }) {
   return (
+    <>
+    <div>
+      <p>Welcome to this beautiful restaurant!</p>
+    </div>
     <main>
       <img
         src={chef}
@@ -40,6 +46,7 @@ function Main({ dishes }) {
         ))}
       </ul>
     </main>
+    </>
   );
 }
 
