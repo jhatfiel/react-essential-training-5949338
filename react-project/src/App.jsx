@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import "./App.css";
 import chef from "./images/chef.jpg";
 
@@ -22,17 +22,12 @@ const dishObjects = items.map((dish, i) => ({
   title: dish
 }));
 
-function Main({ dishes, openStatus, onStatus }) {
+function Main({ dishes, openStatus, toggle }) {
   return (
     <>
       <div>
-        <button onClick={() => onStatus(true)}>
-          I want to be open
-        </button>
-        <h2>
-          Welcome to this beautiful restaurant!{" "}
-          {openStatus ? "Open" : "Closed"}
-        </h2>
+        <button onClick={toggle}>I want be {openStatus?'closed':'open'}</button>
+        <h2>Welcome to this beautiful restaurant! {openStatus?'Open':'Closed'}</h2>
       </div>
       <main>
         <img
@@ -56,7 +51,8 @@ function Main({ dishes, openStatus, onStatus }) {
 }
 
 function App() {
-  const [status, setStatus] = useState(true);
+  //const [status, setStatus] = useState(true);
+  const [status, toggle] = useReducer((status)=>!status, true);
 
   return (
     <div>
@@ -64,15 +60,11 @@ function App() {
         The restaurant is currently{" "}
         {status ? "open" : "closed"}.
       </h1>
-      <button onClick={() => setStatus(!status)}>
+      <button onClick={toggle}>
         {status ? "Close" : "Open"} Restaurant
       </button>
       <Header name="Alex" year={new Date().getFullYear()} />
-      <Main
-        dishes={dishObjects}
-        openStatus={status}
-        onStatus={setStatus}
-      />
+      <Main dishes={dishObjects} openStatus={status} toggle={toggle}/>
     </div>
   );
 }
