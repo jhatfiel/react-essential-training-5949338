@@ -1,4 +1,7 @@
-import { useState, useReducer } from "react";
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import { useState, useReducer, useEffect } from "react";
 import "./App.css";
 import chef from "./images/chef.jpg";
 
@@ -61,6 +64,11 @@ function App() {
     (status) => !status,
     true
   );
+
+  useEffect(() => {
+    console.log(`useEffect: The Restaurant is ${status?'Open':'Closed'}`);
+  }, [status]);
+
   return (
     <div>
       <h1>
