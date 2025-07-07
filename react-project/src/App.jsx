@@ -1,3 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import "./App.css";
 import chef from "./images/chef.jpg";
 
@@ -49,8 +52,11 @@ function Main({ dishes }) {
 }
 
 function App() {
+  const [status, setStatus] = useState("Open");
   return (
     <div>
+      <h1> The restaurant is currently {status}</h1>
+      <button onClick={()=>setStatus('Closed')}>Close Restaurant</button>
       <Header name="Alex" year={new Date().getFullYear()} />
       <Main dishes={dishObjects} />
     </div>
